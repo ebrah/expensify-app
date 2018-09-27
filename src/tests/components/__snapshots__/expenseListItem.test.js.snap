@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render expenseList with empty message 1`] = `
+<div>
+  <Link
+    replace={false}
+    to="/edit/undefined"
+  >
+    <h3>
+       
+       
+    </h3>
+  </Link>
+  <p>
+     
+      -  
+  </p>
+</div>
+`;
+
+exports[`should render the expense item in the component  1`] = `
+<div>
+  <Link
+    replace={false}
+    to="/edit/1"
+  >
+    <h3>
+       
+      Gum
+       
+    </h3>
+  </Link>
+  <p>
+     
+    200
+      -  
+    0
+  </p>
+</div>
+`;
