@@ -10,10 +10,12 @@ export class ExpenseListFilters extends React.Component{
     }
 
     onDatesChange = ({ startDate, endDate }) => {
+
+         console.log('start_date', startDate);
+         console.log('end_date', endDate);
+
          this.props.setStartDate(startDate);
          this.props.setEndDate(endDate);
-
-        //  console.log(this.props);
     };
 
     onFocusChange = (calenderFocused) => {
@@ -27,11 +29,9 @@ export class ExpenseListFilters extends React.Component{
     onSortChange = (e) => {
         if(e.target.value === 'date'){
             this.props.sortByDate();
-            // console.log('dispatched action');
         }else if( e.target.value === 'amount'){
             this.props.sortByAmount();
         }
-     
     }
 
     render(){
@@ -55,8 +55,8 @@ export class ExpenseListFilters extends React.Component{
                   startDate={this.props.filters.startDate}
                   endDate = {this.props.filters.endDate}
                   onDatesChange ={this.onDatesChange}
-                  focusedInput ={ this.state.calenderFocused}
-                  onFocusChange ={ this.onFocusChange }
+                  focusedInput ={this.state.calenderFocused}
+                  onFocusChange ={this.onFocusChange }
                   numberOfMonths ={1}
                   isOutsideRange ={() => false}
                   showClearDates = {true}
@@ -76,9 +76,8 @@ const mapDispatchToProps = ( dispatch ) => ({
    setTextFilter: (text) => dispatch(setTextFilter(text)),
    sortByDate : ()  => dispatch(sortByDate()),
    sortByAmount: () => dispatch(sortByAmount()),
-   setStartDate: () => dispatch(setStartDate(startDate)),
-   setEndDate: () => dispatch(setEndDate(endDate))
-
+   setStartDate: (startDate) => dispatch(setStartDate(startDate)),
+   setEndDate: (endDate) => dispatch(setEndDate(endDate))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpenseListFilters);
