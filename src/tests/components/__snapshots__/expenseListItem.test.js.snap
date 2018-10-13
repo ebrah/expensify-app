@@ -12,8 +12,9 @@ exports[`should render expenseList with empty message 1`] = `
     </h3>
   </Link>
   <p>
-     
-      -  
+    $0.00
+    -
+    Jan 1st, 1970
   </p>
 </div>
 `;
@@ -31,10 +32,9 @@ exports[`should render the expense item in the component  1`] = `
     </h3>
   </Link>
   <p>
-     
-    200
-      -  
-    0
+    $2.00
+    -
+    Jan 1st, 1970
   </p>
 </div>
 `;
