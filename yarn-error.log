@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.10.1/libexec/bin/yarn.js add express
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.10.1/libexec/bin/yarn.js webpack-server
 
 PATH: 
   /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin
@@ -14,16 +14,22 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: EACCES: permission denied, unlink '/Users/ebrah/Documents/WebProjects/react-web-courses/expensify-app/node_modules/ajv-keywords/README.md'
+  SyntaxError: /Users/ebrah/Documents/WebProjects/react-web-courses/expensify-app/package.json: Unexpected token } in JSON at position 1189
+      at JSON.parse (<anonymous>)
+      at /usr/local/Cellar/yarn/1.10.1/libexec/lib/cli.js:1136:59
+      at Generator.next (<anonymous>)
+      at step (/usr/local/Cellar/yarn/1.10.1/libexec/lib/cli.js:98:30)
+      at /usr/local/Cellar/yarn/1.10.1/libexec/lib/cli.js:109:13
 
 npm manifest: 
   {
     "scripts": {
-      "serve": "live-server public/",
       "build:dev": "webpack",
       "build:prod": "webpack -p --env production",
       "webpack-server": "webpack-dev-server --mode=development",
-      "test": "jest --config=jest.config.json"
+      "test": "jest --config=jest.config.json",
+      "start": "node server/server.js",
+      "heroku-postbuild": "yarn run build:prod"
     },
     "dependencies": {
       "babel-cli": "^6.26.0",
@@ -34,12 +40,9 @@ npm manifest:
       "babel-preset-env": "^1.7.0",
       "babel-preset-react": "^6.24.1",
       "css-loader": "^1.0.0",
-      "enzyme": "^3.5.0",
       "enzyme-adapter-react-16": "^1.3.0",
-      "enzyme-to-json": "3.3.4",
+      "express": "^4.16.4",
       "extract-text-webpack-plugin": "^4.0.0-beta.0",
-      "jest": "^23.5.0",
-      "live-server": "^1.2.0",
       "moment": "2.18.1",
       "node-sass": "^4.9.3",
       "normalize.css": "^8.0.0",
@@ -50,21 +53,25 @@ npm manifest:
       "react-dom": "^16.4.2",
       "react-redux": "^5.0.7",
       "react-router-dom": "^4.3.1",
-      "react-test-renderer": "^16.4.2",
       "redux": "^4.0.0",
       "sass-loader": "^7.1.0",
       "style-loader": "^0.22.1",
       "uuid": "^3.3.2",
       "webpack": "^4.16.5",
       "webpack-cli": "^3.1.0",
-      "webpack-dev-server": "^3.1.5"
     },
     "name": "expensify-app",
     "version": "1.0.0",
     "description": "learning",
     "main": "index.js",
     "license": "MIT",
-    "devDependencies": {}
+    "devDependencies": {
+      "enzyme": "^3.5.0",
+      "enzyme-to-json": "3.3.4",
+      "jest": "^23.5.0",
+      "react-test-renderer": "^16.4.2",
+      "webpack-dev-server": "^3.1.5"
+    }
   }
 
 yarn manifest: 
@@ -1394,6 +1401,22 @@ Lockfile:
       qs "6.5.1"
       raw-body "2.3.2"
       type-is "~1.6.15"
+  
+  body-parser@1.18.3:
+    version "1.18.3"
+    resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.18.3.tgz#5b292198ffdd553b3a0f20ded0592b956955c8b4"
+    integrity sha1-WykhmP/dVTs6DyDe0FkrlWlVyLQ=
+    dependencies:
+      bytes "3.0.0"
+      content-type "~1.0.4"
+      debug "2.6.9"
+      depd "~1.1.2"
+      http-errors "~1.6.3"
+      iconv-lite "0.4.23"
+      on-finished "~2.3.0"
+      qs "6.5.2"
+      raw-body "2.3.3"
+      type-is "~1.6.16"
   
   bonjour@^3.5.0:
     version "3.5.0"
@@ -2859,6 +2882,42 @@ Lockfile:
       utils-merge "1.0.1"
       vary "~1.1.2"
   
+  express@^4.16.4:
+    version "4.16.4"
+    resolved "https://registry.yarnpkg.com/express/-/express-4.16.4.tgz#fddef61926109e24c515ea97fd2f1bdbf62df12e"
+    integrity sha512-j12Uuyb4FMrd/qQAm6uCHAkPtO8FDTRJZBDd5D2KOL2eLaz1yUNdUB/NOIyq0iU4q4cFarsUCrnFDPBcnksuOg==
+    dependencies:
+      accepts "~1.3.5"
+      array-flatten "1.1.1"
+      body-parser "1.18.3"
+      content-disposition "0.5.2"
+      content-type "~1.0.4"
+      cookie "0.3.1"
+      cookie-signature "1.0.6"
+      debug "2.6.9"
+      depd "~1.1.2"
+      encodeurl "~1.0.2"
+      escape-html "~1.0.3"
+      etag "~1.8.1"
+      finalhandler "1.1.1"
+      fresh "0.5.2"
+      merge-descriptors "1.0.1"
+      methods "~1.1.2"
+      on-finished "~2.3.0"
+      parseurl "~1.3.2"
+      path-to-regexp "0.1.7"
+      proxy-addr "~2.0.4"
+      qs "6.5.2"
+      range-parser "~1.2.0"
+      safe-buffer "5.1.2"
+      send "0.16.2"
+      serve-static "1.13.2"
+      setprototypeof "1.1.0"
+      statuses "~1.4.0"
+      type-is "~1.6.16"
+      utils-merge "1.0.1"
+      vary "~1.1.2"
+  
   extend-shallow@^2.0.1:
     version "2.0.1"
     resolved "https://registry.yarnpkg.com/extend-shallow/-/extend-shallow-2.0.1.tgz#51af7d614ad9a9f610ea1bafbb989d6b1c56890f"
@@ -3580,7 +3639,7 @@ Lockfile:
       setprototypeof "1.0.3"
       statuses ">= 1.3.1 < 2"
   
-  http-errors@~1.6.2:
+  http-errors@1.6.3, http-errors@~1.6.2, http-errors@~1.6.3:
     version "1.6.3"
     resolved "https://registry.yarnpkg.com/http-errors/-/http-errors-1.6.3.tgz#8b55680bb4be283a0b5bf4ea2e38580be1d9320d"
     integrity sha1-i1VoC7S+KDoLW/TqLjhYC+HZMg0=
@@ -6033,7 +6092,7 @@ Lockfile:
       loose-envify "^1.3.1"
       object-assign "^4.1.1"
   
-  proxy-addr@~2.0.3:
+  proxy-addr@~2.0.3, proxy-addr@~2.0.4:
     version "2.0.4"
     resolved "https://registry.yarnpkg.com/proxy-addr/-/proxy-addr-2.0.4.tgz#ecfc733bf22ff8c6f407fa275327b9ab67e48b93"
     integrity sha512-5erio2h9jp5CHGwcybmxmVqHmnCBZeewlfJ0pex+UW7Qny7OOZXTtH56TGNyBizkgiOwhJtMKrVzDTeKcySZwA==
@@ -6109,7 +6168,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.1.tgz#349cdf6eef89ec45c12d7d5eb3fc0c870343a6d8"
     integrity sha512-eRzhrN1WSINYCDCbrz796z37LOe3m5tmW7RQf6oBntukAG1nmovJvhnwHHRMAfeoItc1m2Hk02WER2aQ/iqs+A==
   
-  qs@~6.5.1, qs@~6.5.2:
+  qs@6.5.2, qs@~6.5.1, qs@~6.5.2:
     version "6.5.2"
     resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
     integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
@@ -6186,6 +6245,16 @@ Lockfile:
       bytes "3.0.0"
       http-errors "1.6.2"
       iconv-lite "0.4.19"
+      unpipe "1.0.0"
+  
+  raw-body@2.3.3:
+    version "2.3.3"
+    resolved "https://registry.yarnpkg.com/raw-body/-/raw-body-2.3.3.tgz#1b324ece6b5706e153855bc1148c65bb7f6ea0c3"
+    integrity sha512-9esiElv1BrZoI3rCDuOuKCBRbuApGGaDPQfjSflGxdy4oyzqghxu6klEkkVIvBje+FF0BX9coEv8KqW6X/7njw==
+    dependencies:
+      bytes "3.0.0"
+      http-errors "1.6.3"
+      iconv-lite "0.4.23"
       unpipe "1.0.0"
   
   rc@^1.2.7:
