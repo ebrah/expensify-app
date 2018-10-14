@@ -23,3 +23,5 @@ export default [
     }
 
 ];
+
+//total 9000
